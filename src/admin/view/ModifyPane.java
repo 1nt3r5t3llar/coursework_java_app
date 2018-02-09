@@ -1,5 +1,7 @@
 package admin.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,36 +18,34 @@ import javafx.scene.text.Font;
 public class ModifyPane extends VBox {
 	
 	private Label modifyLabel;
+	private Button modify;
 	
 	public ModifyPane() {
 		
 		this.setStyle("-fx-background-color: #EBF6FF;");
 		this.setBorder(new Border(new BorderStroke(Color.web("#000000"), BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
 	
-		modifyLabel = new Label("Modify");
-		modifyLabel.setStyle("-fx-font-weight: bold;");
-		
-        Button btn1 = new Button("Modify");
-        btn1.setPrefSize(100, 50);
+        modify = new Button("Modify");
+        modify.setPrefSize(100, 50);
         
-		Label lb = new Label("The modify option will allow you to Add, Edit and Remove items from the Shopping Cart database.");
-		lb.setFont(Font.font("Calibri", 12));
-		lb.setTextFill(Color.DARKBLUE);
-	    lb.setPrefWidth(250);
-		lb.setWrapText(true);
+		modifyLabel = new Label("The modify option will allow you to Add, Edit and Remove items from the Shopping Cart database.");
+		modifyLabel.setFont(Font.font("Calibri", 12));
+		modifyLabel.setTextFill(Color.DARKBLUE);
+		modifyLabel.setPrefWidth(250);
+		modifyLabel.setWrapText(true);
 
         
 		//use a combination of horizontal and vertical boxes
 		//with spacing and padding to create a uniform layout
 		
 		HBox box1 = new HBox();
-		box1.getChildren().add(btn1);
+		box1.getChildren().add(modify);
 		box1.setSpacing(10);
 		box1.setPadding(new Insets(10,20,10,10));
 		box1.setAlignment(Pos.CENTER);
 		
 		HBox box2 = new HBox();
-		box2.getChildren().add(lb);
+		box2.getChildren().add(modifyLabel);
 		box2.setSpacing(10);
 	    box2.setPadding(new Insets(0,10,0,20));
 		box2.setAlignment(Pos.CENTER);
@@ -58,6 +58,10 @@ public class ModifyPane extends VBox {
 		
 		this.getChildren().addAll(container);
 	
+	}
+	
+	public void addModifyButtonHandler(EventHandler<ActionEvent> handler) {
+		modify.setOnAction(handler);
 	}
 
 }
