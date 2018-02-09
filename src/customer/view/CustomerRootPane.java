@@ -33,12 +33,12 @@ public class CustomerRootPane extends VBox{
 		lb.setTextFill(Color.WHITE);
 		
 		HBox box1 = new HBox();
-		box1.getChildren().add(lb);
+		box1.getChildren().addAll(lb);
 		box1.setSpacing(10);
 		box1.setPadding(new Insets(30,10,20,10));
 		box1.setAlignment(Pos.CENTER);
 
-		VBox rootContainer = new VBox(ncp, lcp);
+		VBox rootContainer = new VBox(ncp, lcp, hb);
 		//set styling for main container
 		rootContainer.setPadding(new Insets(10,260,10,260));
 		rootContainer.setSpacing(20);
