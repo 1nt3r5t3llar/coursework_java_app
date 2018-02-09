@@ -4,6 +4,7 @@ import view.LoginPane;
 import view.ShoppingCartRootPane;
 import admin.controller.AdminController;
 import admin.view.AdminRootPane;
+import admin.view.ModifyRootPane;
 import customer.controller.CustomerController;
 import customer.view.CustomerRootPane;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ public class ShoppingCartController {
 	private LoginPane lp;
 	private Stage primaryStage;
 	private AdminRootPane adminScreen;
+	private ModifyRootPane modScreen;
 	private CustomerRootPane customerScreen;
 
 
@@ -42,8 +44,9 @@ public class ShoppingCartController {
 	private class AdministratorHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent e) {
 			adminScreen = new AdminRootPane();
+			modScreen = new ModifyRootPane();
 			Scene scene2 = new Scene(adminScreen);
-			new AdminController(adminScreen, primaryStage);
+			new AdminController(adminScreen, modScreen, primaryStage);
 			primaryStage.setScene(scene2);
 			primaryStage.show();
 		}

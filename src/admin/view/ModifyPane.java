@@ -19,12 +19,13 @@ public class ModifyPane extends VBox {
 	
 	private Label modifyLabel;
 	private Button modify;
+
 	
 	public ModifyPane() {
 		
 		this.setStyle("-fx-background-color: #EBF6FF;");
 		this.setBorder(new Border(new BorderStroke(Color.web("#000000"), BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
-	
+
         modify = new Button("Modify");
         modify.setPrefSize(100, 50);
         
@@ -59,7 +60,7 @@ public class ModifyPane extends VBox {
 		this.getChildren().addAll(container);
 	
 	}
-	
+		
 	public void addModifyButtonHandler(EventHandler<ActionEvent> handler) {
 		modify.setOnAction(handler);
 	}

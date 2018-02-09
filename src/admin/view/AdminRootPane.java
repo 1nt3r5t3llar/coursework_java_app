@@ -67,6 +67,8 @@ public class AdminRootPane extends VBox{
 		return hb;
 	}
 	
+
+	
 	//public AdminMenuBar getMenuBar() {
 		//return menuBar;
 	//}

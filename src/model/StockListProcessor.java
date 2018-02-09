@@ -36,7 +36,7 @@ public class StockListProcessor  {
         
         sc.close();
 	}
-
+	
 	public void StockListWriter() {
 	
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("StockList.txt"))) {
@@ -52,5 +52,10 @@ public class StockListProcessor  {
 			e.printStackTrace();
 			System.out.println("Error writing");
 		}
+	}
+	
+	public ArrayList<Product> getStock() {
+		return this.stock;
+		
 	}
 }

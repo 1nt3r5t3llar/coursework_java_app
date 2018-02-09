@@ -8,7 +8,8 @@ public class RewardsRootPane extends VBox {
 		 
 		this.setStyle("-fx-background-color: #415D78;");
 		this.setPrefSize(1000, 500);
-
+		
+		
 
 	  }
 }

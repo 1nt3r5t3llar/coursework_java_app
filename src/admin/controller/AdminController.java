@@ -1,6 +1,13 @@
 package admin.controller;
 
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import admin.view.AdminRootPane;
+import admin.view.ModifyButtons;
 import admin.view.ModifyPane;
 import admin.view.ModifyRootPane;
 import admin.view.PromotionsPane;
@@ -12,6 +19,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Product;
+import model.StockListProcessor;
 import view.HomeButton;
 import view.ShoppingCartRootPane;
 
@@ -20,23 +29,29 @@ public class AdminController {
 	private Stage primaryStage;
 	private HomeButton hb;
 	private ModifyPane mp;
+	private ModifyButtons mb;
 	private PromotionsPane pp;
 	private RewardsPane rp;
 	private ShoppingCartRootPane loginScreen;
-	private ModifyRootPane modifyScreen;
+	private AdminRootPane adminScreen;
+	private ModifyRootPane modScreen;
 	private PromotionsRootPane promotionsScreen;
 	private RewardsRootPane rewardsScreen;
+	private ModifyRootPane view2;
 	
 
-	public AdminController(AdminRootPane view, Stage primaryStage) {
+	public AdminController(AdminRootPane view, ModifyRootPane view2, Stage primaryStage) {
 		//initialise model and view
 		this.primaryStage = primaryStage;
-
+		this.view2 = view2;
+		
+		
 		//initialise view sub-container fields for convenient access to these
 		hb = view.getHomeButton(); 
 		mp = view.getModifyPane();
 		pp = view.getPromotionsPane();
 		rp = view.getRewardsPane();
+		mb = view2.getModifyButtons();
 
 		//attach event handlers to view using private helper method
 		this.attachEventHandlers();
@@ -44,9 +59,10 @@ public class AdminController {
 	
 	private void attachEventHandlers() {
 		hb.addHomeButtonHandler(new HomeButtonHandler());
-		mp.addModifyButtonHandler(new ModifyButtonHandler() );
-		pp.addPromotionsButtonHandler(new PromotionsButtonHandler() );
-		rp.addRewardsButtonHandler(new RewardsButtonHandler() );
+		mp.addModifyButtonHandler(new ModifyButtonHandler());
+		pp.addPromotionsButtonHandler(new PromotionsButtonHandler());
+		rp.addRewardsButtonHandler(new RewardsButtonHandler());
+		mb.addOpenButtonHandler(new OpenButtonHandler());
 	}
 	
 	//event handlers are now all inside of the controller - below are inner-class implementations
@@ -62,8 +78,10 @@ public class AdminController {
 	
 	private class ModifyButtonHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent e) {
-			modifyScreen = new ModifyRootPane();
-			Scene scene4 = new Scene(modifyScreen);
+			modScreen = new ModifyRootPane();
+			adminScreen = new AdminRootPane();
+			new AdminController(adminScreen, modScreen, primaryStage);
+			Scene scene4 = new Scene(modScreen);
 			primaryStage.setScene(scene4);
 			primaryStage.show();
 		}
@@ -87,4 +105,24 @@ public class AdminController {
 		}
 	}
 	
+	private class OpenButtonHandler implements EventHandler<ActionEvent> {
+		public void handle(ActionEvent e) {
+			System.out.println("YAYAYAYAYAYAY");
+			StockListProcessor scan = new StockListProcessor();
+			try {
+				scan.StockListScanner();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			ArrayList<Product> stock = scan.getStock();	
+			
+			for (int i=0; i<stock.size();i++) {
+				System.out.println(stock.get(i));
+				
+			view2.textArea.appendText(stock.get(i).toString()+"\n");
+			
+			}
+		}
+	}
 }
